@@ -1,6 +1,12 @@
 import {z} from 'zod';
 import { formatNumberWithDecimal } from './utils';
 
+const currency =  z
+.string()
+.refine((value)=> /^\d+\.\d{2}$/.test(formatNumberWithDecimal(Number(value))), 
+'Price must have exactly two decimal places');
+
+
 // Schema for inserting products
 
 export const insertProductsSchema = z.object({
@@ -13,9 +19,7 @@ export const insertProductsSchema = z.object({
     images: z.array(z.string()).min(1, 'Minimum requiremnts for the images is 1'),
     ifFeatured : z.boolean(),
     banner: z.string().nullable(),
-    price : z
-    .string()
-    .refine((value)=> /^\d+\.\d{2}$/.test(formatNumberWithDecimal(Number(value))))
+    price : currency,
     
 })
 
