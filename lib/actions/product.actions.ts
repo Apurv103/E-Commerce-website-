@@ -11,7 +11,11 @@ export async function getLatestProducts(){
         take: LATEST_PRODUCTS_LIMIT,
         orderBy: {createdAt :'desc'},
     });
-    return convertToPlainObject(data);
+    return convertToPlainObject(data).map((product) => ({
+        ...product,
+        rating: Number(product.rating), // Convert rating to a number
+      }));
+    // return convertToPlainObject(data);
 }
 
 // Get Single Product by it's slug
