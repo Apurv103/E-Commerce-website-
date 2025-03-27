@@ -11,13 +11,18 @@ export const metadata: Metadata = {
 };
 
 
-const signInPage = async () => {
+const signInPage = async (props:{
+    searchParams: Promise<{
+        callbackUrl: string
+    }>
+}) => {
+    const {callbackUrl} = await props.searchParams;
      // Check session
      const session = await auth();
 
      if (session) {
          // Redirect to home if the user is already signed in
-         redirect('/');
+         redirect(callbackUrl || '/');
      }
     // const session = await auth();
 
