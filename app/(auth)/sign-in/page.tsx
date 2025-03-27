@@ -4,12 +4,31 @@ import Link from "next/link";
 import Image from "next/image";
 import { APP_NAME } from "@/lib/constants";
 import CredentialsSignInForm from "./credentials-signin-from";
-
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 export const metadata: Metadata = {
     title: 'Sign In'
 };
 
-const signInPage = () => {
+
+const signInPage = async () => {
+     // Check session
+     const session = await auth();
+
+     if (session) {
+         // Redirect to home if the user is already signed in
+         redirect('/');
+     }
+    // const session = await auth();
+
+    // if (session){
+    //     return {
+    //         redirect: {
+    //             destination: '/',
+    //             permanent: false,
+    //         },
+    //     };
+    // }
     return (
         <div className="w-full max-w-md mx-auto">
             <Card>
