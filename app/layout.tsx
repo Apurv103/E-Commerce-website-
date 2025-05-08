@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "@/resources/resources/assets/styles/globals.css";
 import { APP_DESCRIPTION, APP_NAME, SERVER_URL } from "@/lib/constants";
 import { ThemeProvider } from "next-themes";
+import Header from "@/components/ui/shared/header";
 
 
 const inter = Inter ({subsets: ['latin']});
@@ -26,6 +27,8 @@ export default function RootLayout({
       <body
         className={`${inter.className} antialiased`}
       >
+                <Header></Header>
+
         <ThemeProvider attribute='class' defaultTheme="light" enableSystem disableTransitionOnChange>
            {children}
         </ThemeProvider>
